@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://byjk1bjse2dwk"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_lwphf"]
+[ext_resource type="Texture2D" uid="uid://b0bdjc1ybcsq6" path="res://spirtes/cup.png" id="1_md866"]
+
+[node name="Game" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_lwphf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Cup" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(180, 320)
+texture = ExtResource("1_md866")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(8, 0, 8, 632, 352, 632, 352, 0, 360, 0, 360, 640, 0, 640, 0, 0)
