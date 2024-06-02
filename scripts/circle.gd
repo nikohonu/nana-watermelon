@@ -53,6 +53,7 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node) -> void:
+	print("a")
 	if body is Circle:
 		if body.level == self.level and level < MAX_LEVEL:
 			position = position.lerp(body.position, 0.5)
