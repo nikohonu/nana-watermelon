@@ -1,7 +1,9 @@
 class_name Circle
 extends RigidBody2D
 
-const MAX_LEVEL = 16
+signal score_added(score_to_add: int)
+
+const MAX_LEVEL = 12
 
 var color = [
 	Color("#1a1c2c"),
@@ -39,6 +41,7 @@ var level = 1:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
+	score_added.emit(self.level * 10)
 
 
 func _draw() -> void:
@@ -56,4 +59,5 @@ func _on_body_entered(body: Node) -> void:
 			body.free()
 			self.level += 1
 			apply_central_impulse(Vector2(randi_range(-5, 5), -5))
+			score_added.emit(self.level * 10)
 	

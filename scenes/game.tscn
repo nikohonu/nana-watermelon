@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://byjk1bjse2dwk"]
+[gd_scene load_steps=4 format=3 uid="uid://byjk1bjse2dwk"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_lwphf"]
 [ext_resource type="Texture2D" uid="uid://b0bdjc1ybcsq6" path="res://spirtes/cup.png" id="1_md866"]
+[ext_resource type="Script" path="res://scripts/gui.gd" id="3_d7l5u"]
 
 [node name="Game" type="Node2D"]
 texture_filter = 1
@@ -14,4 +15,39 @@ position = Vector2(180, 320)
 texture = ExtResource("1_md866")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(8, 0, 8, 632, 352, 632, 352, 0, 360, 0, 360, 640, 0, 640, 0, 0)
+polygon = PackedVector2Array(8, 0, 8, 582, 352, 582, 352, 0, 360, 0, 360, 590, 0, 590, 0, 0)
+
+[node name="GUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("score_label")]
+script = ExtResource("3_d7l5u")
+score_label = NodePath("VBoxContainer/HBoxContainer/Score")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GUI/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Current: 1"
+
+[node name="Label3" type="Label" parent="GUI/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Next: 1
+"
+
+[node name="Score" type="Label" parent="GUI/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Score: 100"
+
+[connection signal="score_changed" from="." to="GUI" method="_on_game_score_changed"]
