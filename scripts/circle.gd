@@ -52,9 +52,8 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node) -> void:
 	if body is Circle:
 		if body.level == self.level and level < MAX_LEVEL:
-			#print(self, " level ", level, " with ", body, " level ", body.level)
 			position = position.lerp(body.position, 0.5)
 			body.free()
-			#body.queue_free()
 			self.level += 1
+			apply_central_impulse(Vector2(randi_range(-5, 5), -5))
 	
