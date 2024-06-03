@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmhaeb2nx7qh1"]
+
+[ext_resource type="Script" path="res://scripts/yokai.gd" id="1_yp25k"]
+[ext_resource type="Texture2D" uid="uid://coj3dns3urijr" path="res://spirtes/yokai/yokai1.png" id="2_mk7aq"]
+
+[node name="Yokai1" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
+texture_filter = 1
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_yp25k")
+level = 1
+sprite = NodePath("Sprite2D")
+score = 10
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_mk7aq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(7, -3, 7, -1, 5, 1, 5, 3, 6, 5, 6, 7, 2, 8, -2, 8, -6, 7, -6, 5, -5, 3, -5, 1, -7, -1, -7, -3, -4, -6, -3, -8, 3, -8, 4, -6)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

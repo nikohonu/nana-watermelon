@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bq0lejcd7xmiu"
-path="res://.godot/imported/circle0.png-e6fd36af4e2803f24f389793f4a14528.ctex"
+uid="uid://blun7m4nmcvtc"
+path="res://.godot/imported/yokai4.png-925c1d09d70001d2a0da35a89e3aa942.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://spirtes/circle0.png"
-dest_files=["res://.godot/imported/circle0.png-e6fd36af4e2803f24f389793f4a14528.ctex"]
+source_file="res://spirtes/yokai/yokai4.png"
+dest_files=["res://.godot/imported/yokai4.png-925c1d09d70001d2a0da35a89e3aa942.ctex"]
 
 [params]
 

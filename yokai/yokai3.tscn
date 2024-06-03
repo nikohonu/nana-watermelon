@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dltauq7jni536"]
+
+[ext_resource type="Script" path="res://scripts/yokai.gd" id="1_bradw"]
+[ext_resource type="Texture2D" uid="uid://c5xbuai6puju5" path="res://spirtes/yokai/yokai3.png" id="2_spww8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ym2iy"]
+radius = 24.0
+
+[node name="Yokai3" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
+texture_filter = 1
+max_contacts_reported = 1
+contact_monitor = true
+script = ExtResource("1_bradw")
+level = 3
+sprite = NodePath("Sprite2D")
+score = 30
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_spww8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ym2iy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
