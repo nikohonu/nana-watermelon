@@ -1,20 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://cmhaeb2nx7qh1"]
 
-[ext_resource type="Script" path="res://scripts/circle.gd" id="1_emq3k"]
+[ext_resource type="Script" path="res://scripts/circle.gd" id="1_elews"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ny8og"]
 resource_local_to_scene = true
 radius = 8.0
 
-[node name="Circle" type="RigidBody2D" node_paths=PackedStringArray("collision_shape2d")]
+[node name="Element" type="RigidBody2D" node_paths=PackedStringArray("collision_shape2d")]
 max_contacts_reported = 1
 contact_monitor = true
-script = ExtResource("1_emq3k")
+script = ExtResource("1_elews")
 collision_shape2d = NodePath("CollisionShape2D")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-unique_name_in_owner = true
 shape = SubResource("CircleShape2D_ny8og")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

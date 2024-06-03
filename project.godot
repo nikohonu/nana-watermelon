@@ -32,6 +32,11 @@ click={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="game"
+2d_physics/layer_2="shadow"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://byjk1bjse2dwk"]
+[gd_scene load_steps=5 format=3 uid="uid://byjk1bjse2dwk"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_lwphf"]
 [ext_resource type="Texture2D" uid="uid://b0bdjc1ybcsq6" path="res://spirtes/cup.png" id="1_md866"]
+[ext_resource type="PackedScene" uid="uid://cmhaeb2nx7qh1" path="res://scenes/element.tscn" id="2_fxkmt"]
 [ext_resource type="Script" path="res://scripts/gui.gd" id="3_d7l5u"]
 
 [node name="Game" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_lwphf")
+element_scene = ExtResource("2_fxkmt")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
