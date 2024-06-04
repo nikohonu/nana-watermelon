@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## [0.2.0] - 2024-06-04
 
 ### Added
 
@@ -9,6 +9,7 @@
 - Displayed the sprite of the next yokai.
 - Lose condition.
 - Back button to the game scene.
+- Basic main menu.
 
 ### Changed
 

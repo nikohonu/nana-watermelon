@@ -106,9 +106,16 @@ text = "You lose"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="GUI/LostPopup/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/LostPopup/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Exit"
+
+[node name="Back" type="Button" parent="GUI/LostPopup/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[node name="Restart" type="Button" parent="GUI/LostPopup/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Restart"
 
 [node name="Next" type="Sprite2D" parent="."]
 position = Vector2(180, 32)
@@ -122,4 +129,5 @@ texture = ExtResource("5_24tmg")
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="pressed" from="GUI/MarginContainer/VBoxContainer/Back" to="GUI" method="_on_back_pressed"]
-[connection signal="pressed" from="GUI/LostPopup/MarginContainer/MarginContainer/VBoxContainer/Button" to="GUI" method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/LostPopup/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/Back" to="GUI" method="_on_back_pressed"]
+[connection signal="pressed" from="GUI/LostPopup/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/Restart" to="GUI" method="_on_restart_pressed"]
