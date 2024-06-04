@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://blun7m4nmcvtc" path="res://spirtes/yokai/yokai4.png" id="2_kq5j4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ym2iy"]
-radius = 32.0
+radius = 28.0
 
 [node name="Yokai4" type="RigidBody2D" node_paths=PackedStringArray("sprite")]
 texture_filter = 1

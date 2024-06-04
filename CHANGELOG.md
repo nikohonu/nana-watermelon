@@ -1,5 +1,16 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- Draw the second yokai sprite.
+
+### Changed
+
+- Redraw the first yokai sprite.
+- Adjust the size of yokai sprites.
+
 ## [0.2.0] - 2024-06-04
 
 ### Added
