@@ -66,6 +66,7 @@ func _process(_delta) -> void:
 			lose_timer_changed.emit(lose_timer.time_left)
 		if Input.is_action_pressed("click") or has_mouse and current_yokai != null:
 			current_yokai.position = Vector2(get_viewport().get_mouse_position().x, ELEMENT_START_Y)
+			current_yokai.position.x = clamp(current_yokai.position.x, 8, 352)
 
 
 func _input(event) -> void:

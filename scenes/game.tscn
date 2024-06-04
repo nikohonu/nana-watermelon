@@ -36,18 +36,23 @@ script = ExtResource("3_d7l5u")
 score_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Score")
 next_sprite = NodePath("../Next")
 lost_timer_label = NodePath("MarginContainer/VBoxContainer/LoseTimer")
-lost_popup = NodePath("CenterContainer/LostPopup")
+lost_popup = NodePath("LostPopup")
 
 [node name="MarginContainer" type="MarginContainer" parent="GUI"]
 offset_right = 360.0
 offset_bottom = 63.0
 theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GUI/MarginContainer"]
 layout_mode = 2
+
+[node name="Back" type="Button" parent="GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Back"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="GUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -74,34 +79,34 @@ text = "5.00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="GUI"]
+[node name="LostPopup" type="CenterContainer" parent="GUI"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="LostPopup" type="PanelContainer" parent="GUI/CenterContainer"]
-visible = false
+[node name="MarginContainer" type="PanelContainer" parent="GUI/LostPopup"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="GUI/CenterContainer/LostPopup"]
+[node name="MarginContainer" type="MarginContainer" parent="GUI/LostPopup/MarginContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/CenterContainer/LostPopup/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/LostPopup/MarginContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="GUI/CenterContainer/LostPopup/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="GUI/LostPopup/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "You lose"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="GUI/CenterContainer/LostPopup/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="GUI/LostPopup/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
 
@@ -116,4 +121,5 @@ texture = ExtResource("5_24tmg")
 [connection signal="timeout" from="LoseTimer" to="." method="_on_lose_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
-[connection signal="pressed" from="GUI/CenterContainer/LostPopup/MarginContainer/VBoxContainer/Button" to="GUI" method="_on_button_pressed"]
+[connection signal="pressed" from="GUI/MarginContainer/VBoxContainer/Back" to="GUI" method="_on_back_pressed"]
+[connection signal="pressed" from="GUI/LostPopup/MarginContainer/MarginContainer/VBoxContainer/Button" to="GUI" method="_on_button_pressed"]

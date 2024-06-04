@@ -8,6 +8,7 @@
 - A transparent yokai that is shown before it is dropped in the cup.
 - Displayed the sprite of the next yokai.
 - Lose condition.
+- Back button to the game scene.
 
 ### Changed
 

@@ -28,3 +28,7 @@ func _on_button_pressed() -> void:
 
 func _on_game_player_lost() -> void:
 	lost_popup.show()
+
+
+func _on_back_pressed() -> void:
+	get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
