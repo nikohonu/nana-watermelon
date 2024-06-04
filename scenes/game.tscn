@@ -1,13 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://byjk1bjse2dwk"]
+[gd_scene load_steps=6 format=3 uid="uid://byjk1bjse2dwk"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_lwphf"]
 [ext_resource type="Texture2D" uid="uid://b0bdjc1ybcsq6" path="res://spirtes/cup.png" id="1_md866"]
 [ext_resource type="Script" path="res://scripts/gui.gd" id="3_d7l5u"]
 [ext_resource type="Texture2D" uid="uid://blun7m4nmcvtc" path="res://spirtes/yokai/yokai4.png" id="5_24tmg"]
 
-[node name="Game" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h26jh"]
+size = Vector2(360, 128)
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("lose_timer")]
 texture_filter = 1
 script = ExtResource("1_lwphf")
+lose_timer = NodePath("LoseTimer")
+
+[node name="LoseTimer" type="Timer" parent="."]
+wait_time = 6.0
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -18,42 +25,95 @@ texture = ExtResource("1_md866")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(8, 0, 8, 582, 352, 582, 352, 0, 360, 0, 360, 590, 0, 590, 0, 0)
 
-[node name="GUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("score_label", "next_sprite")]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(180, 64)
+shape = SubResource("RectangleShape2D_h26jh")
+
+[node name="GUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("score_label", "next_sprite", "lost_timer_label", "lost_popup")]
 script = ExtResource("3_d7l5u")
-score_label = NodePath("VBoxContainer/MarginContainer/HBoxContainer/Score")
-next_sprite = NodePath("Next")
+score_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Score")
+next_sprite = NodePath("../Next")
+lost_timer_label = NodePath("MarginContainer/VBoxContainer/LoseTimer")
+lost_popup = NodePath("CenterContainer/LostPopup")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="GUI/VBoxContainer"]
-layout_mode = 2
+[node name="MarginContainer" type="MarginContainer" parent="GUI"]
+offset_right = 360.0
+offset_bottom = 63.0
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="GUI/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="GUI/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Next:"
 
-[node name="Score" type="Label" parent="GUI/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Score" type="Label" parent="GUI/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Score: 100"
 
-[node name="Next" type="Sprite2D" parent="GUI"]
+[node name="LoseTimer" type="Label" parent="GUI/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "5.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="GUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LostPopup" type="PanelContainer" parent="GUI/CenterContainer"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="GUI/CenterContainer/LostPopup"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/CenterContainer/LostPopup/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GUI/CenterContainer/LostPopup/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "You lose"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="GUI/CenterContainer/LostPopup/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Next" type="Sprite2D" parent="."]
 position = Vector2(180, 32)
 texture = ExtResource("5_24tmg")
 
+[connection signal="lose_timer_changed" from="." to="GUI" method="_on_game_lose_timer_changed"]
 [connection signal="next_changed" from="." to="GUI" method="_on_game_next_changed"]
+[connection signal="player_lost" from="." to="GUI" method="_on_game_player_lost"]
 [connection signal="score_changed" from="." to="GUI" method="_on_game_score_changed"]
+[connection signal="timeout" from="LoseTimer" to="." method="_on_lose_timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="pressed" from="GUI/CenterContainer/LostPopup/MarginContainer/VBoxContainer/Button" to="GUI" method="_on_button_pressed"]

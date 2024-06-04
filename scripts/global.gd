@@ -7,3 +7,8 @@ var yokai_dict = {
 	4: load("res://yokai/yokai4.tscn"),
 	5: load("res://yokai/yokai5.tscn")
 }
+
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		get_tree().quit() # default behavior
